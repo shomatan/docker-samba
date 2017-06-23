@@ -5,11 +5,14 @@ MAINTAINER Shoma Nishitateno <shoma416@gmail.com>
 RUN set -xe \
     && apk update \
     && apk add --no-cache \
-        dumb-init \
         samba=4.6.4-r0 \
-        samba-common-tools=4.6.4-r0
+        samba-common-tools=4.6.4-r0 \
+    && touch /etc/printcap
+
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
+VOLUME /share
 
 EXPOSE 137/udp 138/udp 139 445
 
-ENTRYPOINT ["dumb-init", "smbd", "--foreground", "--log-stdout"]
-CMD []
+CMD ["sh", "/docker-entrypoint.sh"]
