@@ -6,7 +6,7 @@ RUN set -xe \
     && apk update \
     && apk add --no-cache \
         samba=4.7.6-r0 \
-        samba-common-tools=4.6.4-r0 \
+        samba-common-tools=4.7.6-r0 \
     && touch /etc/printcap
 
 COPY docker-entrypoint.sh /
